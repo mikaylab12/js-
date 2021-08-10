@@ -120,6 +120,7 @@ def protected():
 
 # route to register user
 @app.route('/register/', methods=["POST"])
+@cross_origin()
 def registration():
     response = {}
     db = Database()
@@ -149,6 +150,22 @@ def registration():
     except SMTPRecipientsRefused:
         response['message'] = "Please enter a valid email address."
         response['status_code'] = 400
+        return response
+
+
+@app.route('/login/', methods=["POST"])
+def login():
+    response = {}
+    db = Database()
+    username = request.form['username']
+    password = request.form['password']
+    query = 'SELECT * FROM users WHERE username =? and password=?', username, password
+    # values = (username, password)
+    # db.to_commit(query, values)
+    results = db.fetch_all()
+    if str(username) == results[0][3] and str(password) == results[0][4]:
+        response["message"] = "Successful Registration"
+        response["status_code"] = 201
         return response
 
 
