@@ -84,23 +84,23 @@ userid_table = {u.id: u for u in all_users}
 
 
 # function to get unique token upon registration
-def authenticate(username, password):
-    user = username_table.get(username, None)
-    if user and hmac.compare_digest(user.password.encode('utf-8'), password.encode('utf-8')):
-        return user
+# def authenticate(username, password):
+#     user = username_table.get(username, None)
+#     if user and hmac.compare_digest(user.password.encode('utf-8'), password.encode('utf-8')):
+#         return user
 
 
 # function to identify user
-def identity(payload):
-    user_id = payload['identity']
-    return userid_table.get(user_id, None)
+# def identity(payload):
+#     user_id = payload['identity']
+#     return userid_table.get(user_id, None)
 
 
 # initializing app
 app = Flask(__name__)
 CORS(app)
 app.debug = True
-app.config['SECRET_KEY'] = 'super-secret'
+# app.config['SECRET_KEY'] = 'super-secret'
 app.config["JWT_EXPIRATION_DELTA"] = timedelta(days=1)  # allows token to last a day
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'            # server for email to be sent on
 app.config['MAIL_PORT'] = 465
@@ -109,11 +109,11 @@ app.config['MAIL_PASSWORD'] = 'Ashleemiks12!*'
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
-jwt = JWT(app, authenticate, identity)
+# jwt = JWT(app, authenticate, identity)
 
 
 @app.route('/protected')
-@jwt_required()
+# @jwt_required()
 def protected():
     return '%s' % current_identity
 
@@ -181,7 +181,7 @@ init_product_table()
 
 # route to add a product
 @app.route('/add-product/', methods=["POST"])
-@jwt_required()
+# @jwt_required()
 def add_product():
     response = {}
     db = Database()
@@ -224,7 +224,7 @@ all_products = show_products()
 
 # route to delete single existing product using product ID
 @app.route("/delete-product/<int:product_id>")
-@jwt_required()
+# @jwt_required()
 def delete_product(product_id):
     response = {}
     db = Database()
@@ -237,7 +237,7 @@ def delete_product(product_id):
 
 # route to edit single existing product using product ID
 @app.route('/edit-product/<int:product_id>/', methods=["PUT"])
-@jwt_required()
+# @jwt_required()
 def edit_product(product_id):
     response = {}
     db = Database()
