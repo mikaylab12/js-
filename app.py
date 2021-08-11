@@ -2,6 +2,7 @@ import hmac
 import sqlite3
 from smtplib import SMTPRecipientsRefused
 
+import cross as cross
 from flask import *
 from flask_jwt import *
 from flask_cors import *
@@ -154,6 +155,7 @@ def registration():
 
 
 @app.route('/login/', methods=["POST"])
+@cross.origin()
 def login():
     response = {}
     db = Database()

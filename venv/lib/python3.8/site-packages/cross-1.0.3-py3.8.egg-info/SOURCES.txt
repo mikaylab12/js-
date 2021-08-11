@@ -1,0 +1,11 @@
+LICENSE.txt
+MANIFEST.in
+setup.cfg
+setup.py
+cross/__init__.py
+cross/cross.py
+cross.egg-info/PKG-INFO
+cross.egg-info/SOURCES.txt
+cross.egg-info/dependency_links.txt
+cross.egg-info/entry_points.txt
+cross.egg-info/top_level.txt
